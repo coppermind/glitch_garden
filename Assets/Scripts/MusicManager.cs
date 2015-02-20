@@ -8,12 +8,10 @@ public class MusicManager : MonoBehaviour {
 	private AudioSource audioSource;
 
 	void Awake() {
-		Debug.Log("Awake()");
 		DontDestroyOnLoad(gameObject);
 	}
 
 	void OnLevelWasLoaded(int level) {
-		Debug.Log("OnLevelWasLoaded()");
 		PlayLevelMusic(level);
 	}
 	
@@ -23,9 +21,10 @@ public class MusicManager : MonoBehaviour {
 			audioSource.clip = levelMusic[level];
 			audioSource.loop = true;
 			audioSource.Play();
-			Debug.Log("audioSource.Play() done");
-		} else {
-			Debug.Log("audioSource not played!!!");
 		}
+	}
+	
+	public void SetVolume(float volumeLevel) {
+		audioSource.volume = volumeLevel;
 	}
 }

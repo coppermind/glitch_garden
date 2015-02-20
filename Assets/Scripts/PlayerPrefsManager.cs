@@ -4,8 +4,8 @@ using System.Collections;
 public class PlayerPrefsManager : MonoBehaviour {
 
 	const string MASTER_VOLUME_KEY = "master_volume";
-	const string DIFFICULTY_KEY = "difficulty";
-	const string LEVEL_KEY = "level_unlocked_"; // ie level_unlocked_n
+	const string DIFFICULTY_KEY    = "difficulty";
+	const string LEVEL_KEY         = "level_unlocked_"; // ie level_unlocked_n
 	
 	public static void SetMasterVolume(float volume) {
 		if (volume > 0f && volume < 1f) {
@@ -37,7 +37,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 	}
 	
 	public static void SetDifficulty(float difficulty) {
-		if (difficulty >= 0f && difficulty <= 1f) {
+		if (difficulty > 0f && difficulty < 4f) {
 			PlayerPrefs.SetFloat(DIFFICULTY_KEY, difficulty);
 		} else {
 			Debug.LogError("Difficulty out of range.");
