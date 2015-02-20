@@ -4,10 +4,9 @@ using System.Collections;
 public class LevelManager : MonoBehaviour {
 
 	public float autoLoadNextLevelAfterTime;
-	public bool autoLoadNextLevel = false;
 	
 	void Start() {
-		if (autoLoadNextLevel) {
+		if (0 < autoLoadNextLevelAfterTime) {
 			Invoke ("LoadNextLevel", autoLoadNextLevelAfterTime);
 		}
 	}
