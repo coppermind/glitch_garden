@@ -8,13 +8,6 @@ public class Attacker : MonoBehaviour {
 	public float hitPoints;
 	public float damagePoints;
 	
-//	private bool isWalking = true;
-//	private bool isAttacking = false;
-	private Animator animator;
-	
-	void Start () {
-		animator = GetComponent<Animator>();
-	}
 	
 	void Update () {
 		transform.Translate(Vector3.left * currentSpeed * Time.deltaTime);
@@ -22,10 +15,7 @@ public class Attacker : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.gameObject.tag == "Defender") {
-			Debug.Log("Hit a defender");
-//			isWalking = false;
-//			isAttacking = true;
-			//GameObject children = gameObject.GetComponentsInChildren<GameObject>() as GameObject;
+			Debug.Log("Collided (trigger) with a defender!");
 			
 		} else if (collider.gameObject.tag == "Projectile") {
 			Debug.Log("Hit by a projectile");
@@ -33,10 +23,8 @@ public class Attacker : MonoBehaviour {
 	}
 	
 	public void SetSpeed(float speed) {
+		Debug.Log ("Setting speed to " + speed);
 		currentSpeed = speed;
 	}
 	
-	public void AttackCurrentTarget(float damage) {
-		Debug.Log("Attacking current target with " + damage.ToString() + " amount of damage");
-	}
 }
