@@ -4,9 +4,15 @@ using System.Collections;
 public class Fox : AttackerBase {
 
 	void OnTriggerEnter2D (Collider2D collider) {
-		if (collider.gameObject.tag == "Defender") {
+		GameObject collidedObject = collider.gameObject;
+		
+		if (collidedObject.GetComponent<Defender>()) {
 			Animator animator = GetComponent<Animator>();
-			animator.SetBool("isAttacking", true);
+			if (collidedObject.GetComponent<Gravestone>()) {
+				animator.SetTrigger("jump trigger");
+			} else {
+				animator.SetBool("isAttacking", true);
+			}
 		}
 	}
 	
