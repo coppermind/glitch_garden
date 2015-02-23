@@ -7,16 +7,12 @@ public class Fox : AttackerBase {
 		GameObject collidedObject = collider.gameObject;
 		
 		if (collidedObject.GetComponent<Defender>()) {
-			Animator animator = GetComponent<Animator>();
 			if (collidedObject.GetComponent<Gravestone>()) {
-				animator.SetTrigger("jump trigger");
+				TriggerJump();
 			} else {
-				animator.SetBool("isAttacking", true);
+				Attack();
 			}
 		}
 	}
-	
-	void Jump() {
-		SetSpeed(2.4f);
-	}
+
 }

@@ -1,24 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (Attacker))]
 public class AttackerBase : MonoBehaviour {
 
-	private Attacker attacker;
+	public float hitPoints;
+	public float damagePoints;
+	public float walkSpeed;
+	public float jumpSpeed;
+	
+	protected Attacker attacker;
+	protected Animator animator;
+	
+	private float currentSpeed = 0f;
 	
 	void Start() {
 		attacker = GetComponentInParent<Attacker>();
+		animator = GetComponent<Animator>();
 	}
 	
-	public void StopWalking() {
-		attacker.SetSpeed(0f);
+	void Update() {
+		transform.Translate(Vector3.left * currentSpeed * Time.deltaTime);
 	}
 	
-	public void StartWalking() {
-		attacker.SetSpeed(0.5f);
+	protected void Attack() {
+		animator.SetBool("isAttacking", true);
 	}
 	
-	public void SetSpeed(float speed) {
-		attacker.SetSpeed(speed);
+	protected void TriggerJump() {
+		animator.SetTrigger("jump trigger");
+	}
+	
+	protected void Jump() {
+		SetSpeed(jumpSpeed);
+	}
+	
+	protected void Walk() {
+		SetSpeed(walkSpeed);
+	}
+	
+	protected void Stand() {
+		SetSpeed(0f);
+	}
+
+	void SetSpeed(float speed) {
+		currentSpeed = speed;
 	}
 
 }
