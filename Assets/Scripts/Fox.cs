@@ -10,7 +10,7 @@ public class Fox : AttackerBase {
 			if (collidedObject.GetComponent<Gravestone>()) {
 				TriggerJump();
 			} else {
-				Attack();
+				Attack(collidedObject);
 			}
 		}
 	}

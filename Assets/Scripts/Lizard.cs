@@ -7,7 +7,7 @@ public class Lizard : AttackerBase {
 		GameObject collidedObject = collider.gameObject;
 		
 		if (collidedObject.GetComponent<Defender>()) {
-			Attack();
+			Attack(collidedObject);
 		}
 	}
 }
