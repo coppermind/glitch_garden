@@ -15,7 +15,7 @@ public class DefenderProjectile : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.gameObject.tag == "Attacker") {
-			//Destroy(gameObject);
+			Destroy(gameObject);
 		}
 	}
 }

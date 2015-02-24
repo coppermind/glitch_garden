@@ -1,28 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//[RequireComponent (typeof (Attacker))]
 [RequireComponent (typeof (Animator))]
+[RequireComponent (typeof (Health))]
 public class AttackerBase : MonoBehaviour {
 
-	public float hitPoints;
 	public float damagePoints;
 	public float walkSpeed;
 	public float jumpSpeed;
 	
-	//protected Attacker attacker;
 	protected Animator animator;
+	protected Health health;
 	
 	private float currentSpeed = 0f;
 	private GameObject currentTarget;
 	
 	void Start() {
-		//attacker = GetComponentInParent<Attacker>();
 		animator = GetComponent<Animator>();
+		health = GetComponent<Health>();
 	}
 	
 	void Update() {
 		transform.Translate(Vector3.left * currentSpeed * Time.deltaTime);
+		if (!currentTarget) {
+			animator.SetBool("isAttacking", false);
+		}
 	}
 	
 	protected void Attack(GameObject target) {
@@ -31,7 +33,12 @@ public class AttackerBase : MonoBehaviour {
 	}
 	
 	protected void StrikeTarget() {
-		Debug.Log("Striking current target: " + currentTarget);
+		if (currentTarget) {
+			Health targetHealth = currentTarget.GetComponent<Health>();
+			if (targetHealth) {
+				targetHealth.HitWith(damagePoints);
+			}
+		}
 	}
 	
 	protected void TriggerJump() {

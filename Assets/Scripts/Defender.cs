@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Defender : MonoBehaviour {
 
-	public float hitPoints;
-
 	void Start () {
 	
 	}
