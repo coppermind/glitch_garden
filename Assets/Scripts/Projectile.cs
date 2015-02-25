@@ -11,11 +11,16 @@ public class Projectile : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
-		GameObject attacker = collider.gameObject;
+		GameObject tagged = collider.gameObject;
 		
-		if (attacker.tag == "Attacker") {
-			Health health = attacker.GetComponent<Health>();
+		if (tagged.tag == "Attacker") {
+			Health health = tagged.GetComponent<Health>();
 			health.HitWith(damage);
+			Destroy(gameObject);
+		}
+		
+		if (tagged.tag == "Shredder") {
+			Destroy(gameObject);
 		}
 	}
 }
