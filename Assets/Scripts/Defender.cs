@@ -7,7 +7,7 @@ public class Defender : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.gameObject.tag == "Attacker") {
 		
-		} else if (collider.gameObject.tag == "AttackerProjectile") {
+		} else if (collider.gameObject.tag == "Projectile") {
 		
 		}
 	}

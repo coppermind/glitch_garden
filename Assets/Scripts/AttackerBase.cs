@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent (typeof (Health))]
 public class AttackerBase : MonoBehaviour {
 
-	public float damagePoints;
+	public float damage;
 	public float walkSpeed;
 	public float jumpSpeed;
 	
@@ -36,7 +36,7 @@ public class AttackerBase : MonoBehaviour {
 		if (currentTarget) {
 			Health targetHealth = currentTarget.GetComponent<Health>();
 			if (targetHealth) {
-				targetHealth.HitWith(damagePoints);
+				targetHealth.HitWith(damage);
 			}
 		}
 	}
