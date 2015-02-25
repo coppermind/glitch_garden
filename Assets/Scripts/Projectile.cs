@@ -18,9 +18,6 @@ public class Projectile : MonoBehaviour {
 			health.HitWith(damage);
 			Destroy(gameObject);
 		}
-		
-		if (tagged.tag == "Shredder") {
-			Destroy(gameObject);
-		}
+
 	}
 }
