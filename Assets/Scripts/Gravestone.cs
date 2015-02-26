@@ -3,13 +3,21 @@ using System.Collections;
 
 public class Gravestone : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	void OnTriggerEnter2D(Collider2D collider) {
+		Attacker attacker = collider.gameObject.GetComponent<Attacker>();
+		
+		if (attacker) {
+			Animator animator = GetComponent<Animator>();
+			animator.SetBool("isBeingAttacked", true);
+		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnTriggerExit2D(Collider2D collider) {
+		Projectile projectile = collider.gameObject.GetComponent<Projectile>();
+		
+		if (!projectile) {
+			Animator animator = GetComponent<Animator>();
+			animator.SetBool("isBeingAttacked", false);
+		}
 	}
 }

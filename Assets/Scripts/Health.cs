@@ -6,6 +6,7 @@ public class Health : MonoBehaviour {
 	public float health;
 	
 	public void Kill() {
+		gameObject.transform.Translate(Vector3.right * 2f);
 		Destroy(gameObject);
 	}
 	
