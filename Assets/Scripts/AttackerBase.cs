@@ -15,9 +15,19 @@ public class AttackerBase : MonoBehaviour {
 	private float currentSpeed = 0f;
 	private GameObject currentTarget;
 	
+	private GameObject defenderParent;
+	
 	void Start() {
 		animator = GetComponent<Animator>();
 		health = GetComponent<Health>();
+		FindOrSetupParent();
+	}
+	
+	void FindOrSetupParent() {
+		defenderParent = GameObject.Find("Defenders");
+		if (null == defenderParent) {
+			defenderParent = new GameObject("Defenders");
+		}
 	}
 	
 	void Update() {
