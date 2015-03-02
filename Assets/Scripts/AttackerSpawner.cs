@@ -17,7 +17,6 @@ public class AttackerSpawner : MonoBehaviour {
 		Debug.Log("Spawning: " + UnityEngine.Random.Range(0, attackers.Length * 100) % attackers.Length);
 		Debug.Log("Time Array: " + lastSpawnTime.Length);
 		Debug.Log("First: " + lastSpawnTime[0]);
-//		Debug.Log("Time: " + startedAt - DateTime.Now);
 		foreach (GameObject thisAttacker in attackers) {
 			if (isTimeToSpawn(thisAttacker)) {
 				Spawn(thisAttacker);
@@ -35,9 +34,13 @@ public class AttackerSpawner : MonoBehaviour {
 			lastSpawnTime[currentAttacker] = Time.time;
 			return true;
 		} else {
-//			GameObject attacker = attackers[currentAttacker];
+			Attacker attackerComponent = attackers[currentAttacker].GetComponent<Attacker>();
 			
-//			float elapsed = attackers[currentAttacker].
+			float elapsedTime = Time.time - lastSpawnTime[currentAttacker];
+			if (attackerComponent.seenEverySeconds < elapsedTime) {
+				lastSpawnTime[currentAttacker] = Time.time;
+				return true;
+			}
 		}
 		return false;
 	}
