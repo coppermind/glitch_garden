@@ -5,8 +5,10 @@ using System.Collections;
 public class DefenderSpawner : MonoBehaviour {
 
 	private GameObject defenderParent;
+	private StarDisplay starDisplay;
 	
 	void Start () {
+		starDisplay = FindObjectOfType<StarDisplay>();
 		FindOrSetupParent();
 	}
 	
@@ -24,10 +26,16 @@ public class DefenderSpawner : MonoBehaviour {
 	}
 	
 	void SpawnDefender() {
-		Vector2 currentPosition = GetWorldPoint();
-		GameObject newDefender = Instantiate(SelectorButton.selectedDefender) as GameObject;
-		newDefender.transform.parent = defenderParent.transform;
-		newDefender.transform.position = currentPosition;
+		int starCost = SelectorButton.selectedDefender.GetComponent<Defender>().starsCost;
+		
+		if (starDisplay.GetBankAmount() > starCost) {
+			Vector2 currentPosition = GetWorldPoint();
+			GameObject newDefender = Instantiate(SelectorButton.selectedDefender) as GameObject;
+			
+			newDefender.transform.parent = defenderParent.transform;
+			newDefender.transform.position = currentPosition;
+			starDisplay.UseStars(starCost);
+		}
 	}
 	
 	Vector2 GetWorldPoint() {

@@ -4,12 +4,14 @@ using System.Collections;
 [RequireComponent (typeof (Health))]
 public class Defender : MonoBehaviour {
 
-	public bool isAttacking = false;
-	
-	private Animator animator;
+	public int starsCost;
 
-	void Update() {
+	private Animator animator;
+	private StarDisplay starDisplay;
+	
+	void Start() {
 		animator = GetComponent<Animator>();
+		starDisplay = FindObjectOfType<StarDisplay>();
 	}
 
 	public void Attack() {
@@ -20,7 +22,7 @@ public class Defender : MonoBehaviour {
 		animator.SetBool("isAttacking", false);
 	}
 	
-	public void AddStars(float amount) {
-		Debug.Log("Added " + amount + " stars");
+	public void AddStars(int amount) {
+		starDisplay.AddStars(amount);
 	}
 }

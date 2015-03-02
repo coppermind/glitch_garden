@@ -4,6 +4,7 @@ using System.Collections;
 public class SelectorButton : MonoBehaviour {
 	
 	public static GameObject selectedDefender;
+	
 	public GameObject defender;
 	
 	private SelectorButton[] buttons;
