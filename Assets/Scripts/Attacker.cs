@@ -22,21 +22,12 @@ public class Attacker : MonoBehaviour {
 	void Start() {
 		animator = GetComponent<Animator>();
 		health = GetComponent<Health>();
-		
-		FindOrSetupParent();
 	}
 	
 	void Update () {
 		transform.Translate(Vector3.left * currentSpeed * Time.deltaTime);
 		if (!currentTarget) {
 			animator.SetBool("isAttacking", false);
-		}
-	}
-	
-	void FindOrSetupParent() {
-		attackerParent = GameObject.Find("Attackers");
-		if (null == attackerParent) {
-			attackerParent = new GameObject("Attackers");
 		}
 	}
 	
