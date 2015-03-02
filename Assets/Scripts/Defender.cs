@@ -5,10 +5,18 @@ using System.Collections;
 public class Defender : MonoBehaviour {
 
 	public bool isAttacking = false;
+	
+	private Animator animator;
 
 	void Update() {
-		Animator animator = GetComponent<Animator>();
-		animator.SetBool("isAttacking", isAttacking);
+		animator = GetComponent<Animator>();
 	}
 
+	public void Attack() {
+		animator.SetBool("isAttacking", true);
+	}
+	
+	public void StopAttack() {
+		animator.SetBool("isAttacking", true);
+	}
 }
