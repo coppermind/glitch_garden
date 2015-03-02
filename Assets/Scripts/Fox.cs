@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 [RequireComponent (typeof (Attacker))]
-public class Fox : AttackerBase {
+public class Fox : MonoBehaviour {
 
 	private Attacker attacker;
 	

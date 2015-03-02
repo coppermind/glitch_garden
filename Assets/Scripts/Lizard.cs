@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof (Attacker))]
-public class Lizard : AttackerBase {
+public class Lizard : MonoBehaviour {
 
 	private Attacker attacker;
 	
