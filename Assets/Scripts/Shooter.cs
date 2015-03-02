@@ -8,20 +8,20 @@ public class Shooter : MonoBehaviour {
 	public GameObject gun;
 	
 	private GameObject parent;
-	private Animator animator;
+	private Defender defender;
 	private AttackerSpawner myLaneSpawner;
 	
 	void Start() {
-		animator = GameObject.FindObjectOfType<Animator>();
+		defender = GameObject.FindObjectOfType<Defender>();
 		SetMyLaneSpawner();
 		FindOrSetupParent();
 	}
 	
 	void Update() {
 		if (IsAttackerInLane()) {
-			animator.SetBool("isAttacking", true);
+			defender.Attack();
 		} else {
-			animator.SetBool("isAttacking", false);
+			defender.StopAttack();
 		}
 	}
 	

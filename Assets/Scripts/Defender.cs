@@ -17,6 +17,10 @@ public class Defender : MonoBehaviour {
 	}
 	
 	public void StopAttack() {
-		animator.SetBool("isAttacking", true);
+		animator.SetBool("isAttacking", false);
+	}
+	
+	public void AddStars(float amount) {
+		Debug.Log("Added " + amount + " stars");
 	}
 }
