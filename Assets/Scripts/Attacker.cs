@@ -1,25 +1,76 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (Animator))]
+[RequireComponent (typeof (Health))]
 public class Attacker : MonoBehaviour {
 
+	[Tooltip ("Average number of seconds between spawn")]
+	public float seenEverySeconds;
+	public float damage;
+	public float walkSpeed;
+	public float jumpSpeed;
+	
+	protected Animator animator;
+	protected Health health;
+	
+	private GameObject attackerParent;
+	private float currentSpeed = 0f;
+	private GameObject currentTarget;
+	
+	
+	void Start() {
+		animator = GetComponent<Animator>();
+		health = GetComponent<Health>();
+		
+		FindOrSetupParent();
+	}
+	
 	void Update () {
-		//transform.Translate(Vector3.left * walkSpeed * Time.deltaTime);
+		transform.Translate(Vector3.left * currentSpeed * Time.deltaTime);
+		if (!currentTarget) {
+			animator.SetBool("isAttacking", false);
+		}
 	}
 	
-//	void OnTriggerEnter2D(Collider2D collider) {
-//		if (collider.gameObject.tag == "Defender") {
-//			Debug.Log("Collided (trigger) with a defender!");
-//			
-//		} else if (collider.gameObject.tag == "Projectile") {
-//			Debug.Log("Hit by a projectile");
-//		}
-//	}
+	void FindOrSetupParent() {
+		attackerParent = GameObject.Find("Attackers");
+		if (null == attackerParent) {
+			attackerParent = new GameObject("Attackers");
+		}
+	}
 	
-	/*
+	public void Attack(GameObject target) {
+		animator.SetBool("isAttacking", true);
+		currentTarget = target;
+	}
+	
 	public void SetSpeed(float speed) {
-		Debug.Log ("Setting speed to " + speed);
-		// walkSpeed = speed;
+		currentSpeed = speed;
 	}
-	*/
+	
+	public void TriggerJump() {
+		animator.SetTrigger("jump trigger");
+	}
+	
+	protected void Jump() {
+		SetSpeed(jumpSpeed);
+	}
+	
+	protected void Walk() {
+		SetSpeed(walkSpeed);
+	}
+	
+	protected void Stand() {
+		SetSpeed(0f);
+	}
+	
+	protected void StrikeTarget() {
+		if (currentTarget) {
+			Health targetHealth = currentTarget.GetComponent<Health>();
+			if (targetHealth) {
+				targetHealth.HitWith(damage);
+			}
+		}
+	}
 }
