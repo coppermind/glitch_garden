@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[RequireComponent (typeof(Text))]
 public class StarDisplay : MonoBehaviour {
 
 	private int starsInBank = 10;
