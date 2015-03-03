@@ -28,13 +28,12 @@ public class DefenderSpawner : MonoBehaviour {
 	void SpawnDefender() {
 		int starCost = SelectorButton.selectedDefender.GetComponent<Defender>().starsCost;
 		
-		if (starDisplay.GetBankAmount() > starCost) {
+		if (starDisplay.UseStars(starCost) == StarDisplay.Status.SUCCESS) {
 			Vector2 currentPosition = GetWorldPoint();
 			GameObject newDefender = Instantiate(SelectorButton.selectedDefender) as GameObject;
 			
 			newDefender.transform.parent = defenderParent.transform;
 			newDefender.transform.position = currentPosition;
-			starDisplay.UseStars(starCost);
 		}
 	}
 	

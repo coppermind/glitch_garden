@@ -5,6 +5,8 @@ using System.Collections;
 [RequireComponent (typeof(Text))]
 public class StarDisplay : MonoBehaviour {
 
+	public enum Status {SUCCESS, FAILURE};
+
 	private int starsInBank = 10;
 	private Text text;
 	
@@ -22,9 +24,13 @@ public class StarDisplay : MonoBehaviour {
 		UpdateDisplay();
 	}
 	
-	public void UseStars(int amount) {
-		starsInBank -= amount;
-		UpdateDisplay();
+	public Status UseStars(int amount) {
+		if (amount < starsInBank) {
+			starsInBank -= amount;
+			UpdateDisplay();
+			return Status.SUCCESS;
+		}
+		return Status.FAILURE;
 	}
 	
 	void UpdateDisplay() {
