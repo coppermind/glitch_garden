@@ -1,16 +1,27 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SelectorButton : MonoBehaviour {
 	
 	public static GameObject selectedDefender;
-	
 	public GameObject defender;
 	
 	private SelectorButton[] buttons;
+	private Text costLabel;
 	
 	void Start() {
 		buttons = FindObjectsOfType<SelectorButton>();
+		SetCostLabel();
+	}
+	
+	void SetCostLabel() {
+		costLabel = GetComponentInChildren<Text>();
+		if (!costLabel) {
+			Debug.LogWarning(name + " has no cost label!");
+		}
+		Defender defenderScript = defender.GetComponent<Defender>();
+		costLabel.text = defenderScript.starsCost.ToString();
 	}
 	
 	void OnMouseDown() {
