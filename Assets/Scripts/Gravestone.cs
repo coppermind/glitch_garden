@@ -3,21 +3,19 @@ using System.Collections;
 
 public class Gravestone : MonoBehaviour {
 
-	void OnTriggerEnter2D(Collider2D collider) {
+	private Animator animator;
+	
+	void Start() {
+		animator = gameObject.GetComponent<Animator>();
+		Debug.Log("Animator: " + animator);
+	}
+
+	void OnTriggerStay2D(Collider2D collider) {
 		Attacker attacker = collider.gameObject.GetComponent<Attacker>();
+		Debug.Log("Attacker: " + attacker);
 		
 		if (attacker) {
-			Animator animator = GetComponent<Animator>();
-			animator.SetBool("isBeingAttacked", true);
-		}
-	}
-	
-	void OnTriggerExit2D(Collider2D collider) {
-		Projectile projectile = collider.gameObject.GetComponent<Projectile>();
-		
-		if (!projectile) {
-			Animator animator = GetComponent<Animator>();
-			animator.SetBool("isBeingAttacked", false);
+			animator.SetTrigger("underAttack trigger");
 		}
 	}
 }
