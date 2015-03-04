@@ -4,16 +4,18 @@ using System.Collections;
 public class AttackerSpawner : MonoBehaviour {
 
 	public GameObject[] attackers;
+	private bool isGameOver = false;
 	
 	void Update () {
-		foreach (GameObject thisAttacker in attackers) {
-			if (isTimeToSpawn(thisAttacker)) {
-				Spawn(thisAttacker);
+		if (!isGameOver) {
+			foreach (GameObject thisAttacker in attackers) {
+				if (isTimeToSpawn(thisAttacker)) {
+					Spawn(thisAttacker);
+				}
 			}
 		}
 	}
 	
-
 	bool isTimeToSpawn(GameObject attackerGameObject) {
 		Attacker attackerComponent = attackerGameObject.GetComponent<Attacker>();
 		
@@ -35,5 +37,12 @@ public class AttackerSpawner : MonoBehaviour {
 		GameObject newAttacker = Instantiate(attacker) as GameObject;
 		newAttacker.transform.parent = transform;
 		newAttacker.transform.position = transform.position;
+	}
+	
+	public void GameIsOver() {
+		isGameOver = true;
+		foreach (Transform attacker in transform) {
+			Destroy(attacker.gameObject);
+		}
 	}
 }

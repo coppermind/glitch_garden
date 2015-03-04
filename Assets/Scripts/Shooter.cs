@@ -18,10 +18,14 @@ public class Shooter : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (IsAttackerInLane()) {
-			defender.Attack();
-		} else {
-			defender.StopAttack();
+		try {
+			if (IsAttackerInLane()) {
+				defender.Attack();
+			} else {
+				defender.StopAttack();
+			}
+		} catch (Exception e) {
+			Debug.LogWarning("Error: " + e.Message);
 		}
 	}
 	
@@ -35,7 +39,7 @@ public class Shooter : MonoBehaviour {
 	
 	bool IsAttackerInFront() {
 		foreach (Transform attacker in myLaneSpawner.transform) {
-			if (transform.position.x < attacker.position.x) {
+			if (transform.position.x < attacker.position.x && attacker.position.x < 10f) {
 				return true;
 			}
 		}
